@@ -5,20 +5,19 @@ const webpackMiddleware = require("webpack-dev-middleware");
 const webpackHotMiddleware = require("webpack-hot-middleware");
 
 const env = process.env.NODE_ENV || 'development'
+const _PORT = process.env.REACT_PORT || 3030
 
-console.log(env)
 const app = express();
 app.use(express.static('dist'));
 
 const webpackCompiler = webpack(webpackconfig);
-const wpmw = webpackMiddleware(webpackCompiler,{});
-app.use(wpmw);
+
+app.use(webpackMiddleware(webpackCompiler,{}));
 
 if (env === 'development') {
-    const wphmw = webpackHotMiddleware(webpackCompiler);
-    app.use(wphmw);
+    app.use( webpackHotMiddleware(webpackCompiler));
 }
 
-app.listen(3000, () => {
-  console.log('Example app listening on port 3000!')
+app.listen(_PORT, () => {
+  console.log(`Example app listening on port ${_PORT}!`)
 });

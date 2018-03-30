@@ -9,6 +9,7 @@ const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 const dist = path.resolve(__dirname, 'dist');
 const env = process.env.NODE_ENV || 'development'
+const _PORT = process.env.REACT_PORT || 3030
 
 const GLOBALS = {
     'process.env': {
@@ -39,7 +40,7 @@ var config = {
             chunkFilename: "[id].css"
         }),
         new OpenBrowserPlugin({
-            url: 'http://localhost:3000'
+            url: `http://localhost:${_PORT}`
         })
     ],
     module: {
